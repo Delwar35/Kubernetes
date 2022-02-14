@@ -1,0 +1,22 @@
+# this will expose deploy to the world
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: nginx-svc
+  namespace: default
+
+# which ports to use for deployment
+spec:
+  ports:
+  - nodePort: 30442 # range is 30000-32768
+    port: 80
+    protocol: TCP
+    targetPort: 80
+
+  selector: 
+    app: nginx
+
+  # creating LoadBalancer type of deployment
+  type: LoadBalancer
